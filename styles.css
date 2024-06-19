@@ -1,0 +1,110 @@
+body {
+    box-sizing: border-box;
+    padding: 3rem;
+    font-family: "arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    color: #504e4e; }
+
+    @media only screen and (max-width: 56.25em) {
+      body {
+        padding: 0; } 
+    }
+
+a {
+    text-decoration: none;
+    color: #504e4e;
+    padding: 0.25rem;}
+
+    a:hover {
+      color: #1d7ea8; }
+
+.header {
+    padding: 1rem;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+.footer {
+    padding: 1rem;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    color: #969696;
+    position: absolute;
+    bottom: 0;
+}
+
+.submit_button {
+    font-size: 1.3rem;
+    padding: 0.5rem;
+    margin: 1rem;
+}
+.align-r {
+    float: right;
+}
+.centered {
+    text-align: center;
+}
+.Main_Heads {
+    font-size: 6rem;
+    text-align: center;
+}
+.rounded_corners {
+    width: 40%;
+    height: 2rem;
+    border-radius: 0.5rem;
+}
+
+
+/* --- Advanced Search Form --- */
+
+.adv_header {
+    font-size: 3.5rem;
+    padding: 1.5rem;
+    text-align: left;
+}
+.adv-form {
+    font-size: 1.3rem;
+    margin: 2.5rem 3.5rem;
+}
+.adv_super_label {
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding: 0.2rem;
+    padding-left: 1.8rem;
+
+}
+.adv_search_para_label {
+    font-size: 1.6rem;
+}
+.adv_search_para_field  {
+    padding-left: .45rem;
+    outline: none;
+    font-size: 1.6rem;
+    vertical-align: middle;
+    size: 2rem;
+    width: 30rem;
+    border-radius: 0.3rem;
+}
+
+.grid_container {
+display: grid;
+padding: 2rem;
+grid-column-gap: 2px;
+grid-row-gap: 0.5rem;
+grid-template-columns: 20rem 60rem;
+}
+.grid-item {
+    padding: 0.2rem;
+    font-size: 1.4rem;
+}
+
+#Adv_Button {
+    font-size: 1.3rem;
+    padding: 0.5rem;
+    margin: 1rem;
+    background-color: #2da5d1;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
