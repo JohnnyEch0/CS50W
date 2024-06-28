@@ -1,1 +1,15 @@
 /.vscode
+.pyc
+
+wiki/encyclopedia/__pycache__/__init__.cpython-312.pyc
+wiki/encyclopedia/__pycache__/admin.cpython-312.pyc
+wiki/encyclopedia/__pycache__/apps.cpython-312.pyc
+wiki/encyclopedia/__pycache__/models.cpython-312.pyc
+wiki/encyclopedia/__pycache__/urls.cpython-312.pyc
+wiki/encyclopedia/__pycache__/util.cpython-312.pyc
+wiki/encyclopedia/__pycache__/views.cpython-312.pyc
+wiki/wiki/__pycache__/__init__.cpython-312.pyc
+wiki/wiki/__pycache__/settings.cpython-312.pyc
+wiki/wiki/__pycache__/urls.cpython-312.pyc
+wiki/wiki/__pycache__/wsgi.cpython-312.pyc
+wiki/encyclopedia/migrations/__pycache__/__init__.cpython-312.pyc
