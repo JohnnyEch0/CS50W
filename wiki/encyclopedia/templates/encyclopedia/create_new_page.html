@@ -1,0 +1,19 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia - New Page
+{% endblock %}
+<!--action="{% url 'new' %}"-->
+{% block body %}
+    <h1>Creating a new page</h1>
+    Please use <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax">Markdown</a>
+    <br>
+    <form action="{% url 'new_page' %}" method="post"> 
+        {% csrf_token %}
+        {{ form }}
+        <br>
+        <input type="submit" value="Create new Entry">
+    </form>
+    
+
+{% endblock %}
