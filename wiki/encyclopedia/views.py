@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django import forms
 from . import util
-
+from markdown2 import Markdown as MD
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -11,24 +11,21 @@ def index(request):
 def entry(request, title):
     page = get_page(title)
     if page is not None:
-        return render(request,   "encyclopedia/entry.html", 
+        return render(request,   
+                        "encyclopedia/entry.html", 
                         {"title": title.capitalize(), 
-                        "text": page
+                        "text": MD().convert(page)
                             }
                         ) 
     
     else:
-        return render(request, "encyclopedia/entry_error.html", )
+        return render(request, "encyclopedia/entry_error.html", {"message": "404 - Page not found..."}  )
     
 def search(request):
     query = request.GET.get("q","").capitalize()
     page = get_page(query)
     if page is not None:
-        return render(request,   "encyclopedia/entry.html", 
-                        {"title": query.capitalize(), 
-                        "text": page
-                            }
-                        ) 
+        return redirect("entry", title=query)
     substrings_found = set()
     
     for entry in util.list_entries():
@@ -36,22 +33,12 @@ def search(request):
             substrings_found.add(entry)
     
     if substrings_found == set():
-        return render(request, "encyclopedia/entry_error.html", )
+        return render(request, "encyclopedia/entry_error.html", {"message": "No such Page could be found :["}  )
     else:
         return render(request, "encyclopedia/search.html", {
             "entries": substrings_found
         })
     
-def get_page(title):
-    try:
-        if title.capitalize() in [entry.capitalize() for entry in util.list_entries()]:
-            page = util.get_entry(title)
-            return page
-        else:
-            return None
-    except:
-        return None
-
 def create_new_page(request):
     if request.method == "GET":
         return render(
@@ -68,13 +55,14 @@ def create_new_page(request):
         
         else:
             with open(f"entries/{title}.md", "w") as file:
+                file.write(f"# {title} \n")
                 file.write(content)
-            return redirect(f"wiki/{title}")
+            return redirect("entry", title=title)
 
 def random(request):
     import random
     page_name = random.choice(util.list_entries())
-    return redirect(f"wiki/{page_name}")
+    return redirect("entry", title=page_name)
 
 
 class NewEntry(forms.Form):
@@ -97,3 +85,13 @@ class NewEntry(forms.Form):
             }
         )
     )
+
+def get_page(title):
+    try:
+        if title.capitalize() in [entry.capitalize() for entry in util.list_entries()]:
+            page = util.get_entry(title)
+            return page
+        else:
+            return None
+    except:
+        return None
