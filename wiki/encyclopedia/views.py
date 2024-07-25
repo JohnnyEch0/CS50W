@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django import forms
 from . import util
 from markdown2 import Markdown as MD
+from random import choice
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -14,13 +15,39 @@ def entry(request, title):
         return render(request,   
                         "encyclopedia/entry.html", 
                         {"title": title.capitalize(), 
-                        "text": MD().convert(page)
+                        "text": MD().convert(page),
+                        "title": title
                             }
                         ) 
     
     else:
         return render(request, "encyclopedia/entry_error.html", {"message": "404 - Page not found..."}  )
     
+def edit(request, title):
+    page = get_page(title)
+    if page is None:
+        return render(request, "encyclopedia/entry_error.html", {"message": "404 - Page not found..."}  )
+    
+    elif request.method == "GET":
+        input_form = NewEntry({"title": title, "content": page})
+        
+        return render(
+            request, "encyclopedia/edit.html", 
+            {"form": input_form,
+             "entry": title}
+        )
+    
+    elif request.method == "POST":
+        input_form = NewEntry(request.POST)
+        if input_form.is_valid():
+            title = input_form.cleaned_data.get("title")
+            content = input_form.cleaned_data.get("content")
+
+            util.save_entry(title, content)
+            return redirect("entry", title=title)
+
+    
+
 def search(request):
     query = request.GET.get("q","").capitalize()
     page = get_page(query)
@@ -29,7 +56,9 @@ def search(request):
     substrings_found = set()
     
     for entry in util.list_entries():
-        if query in entry.capitalize():
+        # if query in entry.capitalize():
+        lower_entry = entry.lower()
+        if lower_entry.find(query.lower()) != -1:
             substrings_found.add(entry)
     
     if substrings_found == set():
@@ -60,8 +89,8 @@ def create_new_page(request):
             return redirect("entry", title=title)
 
 def random(request):
-    import random
-    page_name = random.choice(util.list_entries())
+    
+    page_name = choice(util.list_entries())
     return redirect("entry", title=page_name)
 
 

@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block body %}
+    <h1>{{title}}</h1>
     {{ text|safe }}
+    <br>
+    <a href="{% url 'edit' title %}">Edit this Article</a>
 
 {% endblock %}
