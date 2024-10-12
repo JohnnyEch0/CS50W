@@ -1,0 +1,44 @@
+.commerce_body {
+  margin-top: 10px;
+  margin-bottom: 100px;
+  margin-right: 150px;
+  margin-left: 80px;
+}
+
+body {
+  margin: 0.2vw 1vw 1vw
+}
+
+.footer {
+  background-color: #F1F1F1;
+}
+
+.auction_listing {
+  width: 100%;
+  height: 256px;
+
+  border: 0.1em solid rgb(221, 221, 221);
+  border-radius: 5px;
+  border-spacing: 100%;
+}
+
+.auction_price{
+  text-align: right;
+  font-size: 2em;
+  padding: 1vh;
+}
+
+.column {
+  float: left;
+  width: 15%
+}
+
+.column.side {
+  width: 50%;
+  padding: 10px;
+}
+
+.listing_image {
+  width: 100%;
+  height: 256px;
+}

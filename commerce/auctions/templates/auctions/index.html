@@ -1,0 +1,26 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+
+    {% for auction in auctions %}
+    <div class="auction_listing">
+
+        <div class="column">
+            <img class="listing_image" src="static/auctions/images/{{   auction.img_link   }}" alt="Flowers in Chania"> 
+        </div>
+        
+
+        <div class="column side">
+            <h3>{{   auction.title   }}</h3>
+            {{  auction.description  }}
+        </div>
+        
+        <div class="cloumn side auction_price">
+            {{ auction.starting_bit  }} € 
+        </div>
+        
+    </div>
+    <hr>
+    {% endfor %}
+{% endblock %}
