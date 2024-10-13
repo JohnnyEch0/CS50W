@@ -84,7 +84,6 @@ def create_new_page(request):
         
         else:
             with open(f"entries/{title}.md", "w") as file:
-                file.write(f"# {title} \n")
                 file.write(content)
             return redirect("entry", title=title)
 

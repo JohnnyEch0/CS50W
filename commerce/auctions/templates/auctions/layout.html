@@ -24,12 +24,13 @@
             </li>
             {% if user.is_authenticated %}
                 <li class="nav-item">
+                    <a class="nav-link" href="{% url 'create_auction' %}">Create Auction</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
                     
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'create_auction' %}">Create Auction</a>
-                </li>
+                
             {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'login' %}">Log In</a>
@@ -39,6 +40,7 @@
                 </li>
             {% endif %}
         </ul>
+        <hr>
         <div class="commerce_body">
             {% block body %}
             {% endblock %}

@@ -1,6 +1,7 @@
 from django import forms
 from auctions.models import Auction
 from django.forms import ModelForm
+from django.forms.utils import ErrorList
 
 """
 class AuctionCreationForm(forms.Form):
@@ -13,10 +14,19 @@ class AuctionCreationForm(forms.Form):
 
 """
 
+class DivErrorList(ErrorList):
+    def __str__(self):
+        return self.as_divs()
+
+    def as_divs(self):
+        if not self:
+            return ''
+        return '<div class="errorlist">%s</div>' % ''.join(['<div class="error alert alert-danger mt-1">%s</div>' % e for e in self])
+
 class AuctionCreationForm(ModelForm):
     class Meta:
         model = Auction
-        fields = ["owner", "title", "description", "starting_bit", "img_link"]
+        fields = ["owner", "title", "description", "bit", "img_link"]
         exclude = ["owner"]
         labels = {
                 "title": ("Title"),
@@ -33,4 +43,5 @@ class AuctionCreationForm(ModelForm):
                 "max_length": ("Description too long (512 chars)")
             }
         }
-    
+        error_class = DivErrorList
+

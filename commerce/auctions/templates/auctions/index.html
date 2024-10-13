@@ -6,18 +6,21 @@
     {% for auction in auctions %}
     <div class="auction_listing">
 
+        {% if auction.img_link %}
         <div class="column">
-            <img class="listing_image" src="static/auctions/images/{{   auction.img_link   }}" alt="Flowers in Chania"> 
+            <img class="index_listing_image" src="static/auctions/images/{{   auction.img_link   }}" alt="Couldn't load Image"> 
         </div>
+        {% endif %}
         
 
         <div class="column side">
-            <h3>{{   auction.title   }}</h3>
+            <h3><a href="{% url 'listing' auction.id %}" >{{   auction.title   }}</a></h3>
+            
             {{  auction.description  }}
         </div>
         
-        <div class="cloumn side auction_price">
-            {{ auction.starting_bit  }} € 
+        <div class="auction_price">
+            {{ auction.bit  }} € 
         </div>
         
     </div>
